@@ -19,5 +19,5 @@ package = true
 # where = ["src"]
 
 [project.scripts]
-# events-timeline = "events-timeline.main:main"
+events-timeline = "events_timeline.main:main"
 
