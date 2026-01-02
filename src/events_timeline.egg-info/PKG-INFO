@@ -1,5 +1,5 @@
 Metadata-Version: 2.4
-Name: data-summarizer
+Name: events-timeline
 Version: 0.1.0
 Summary: A utility that ingests reports from various text-based raw-data formats such as logs, processes them, and returns a summary of the report
 Requires-Python: >=3.10

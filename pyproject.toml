@@ -11,3 +11,13 @@ dependencies = [
     "plotly>=6.5.0",
     "termcolor>=3.2.0",
 ]
+
+[tool.uv]
+package = true
+
+# [tool.uv.sources]
+# where = ["src"]
+
+[project.scripts]
+# events-timeline = "events-timeline.main:main"
+
