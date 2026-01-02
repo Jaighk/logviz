@@ -1,7 +1,7 @@
 [project]
-name = "events-timeline"
+name = "logviz"
 version = "0.1.0"
-description = "A utility that ingests reports from various text-based raw-data formats such as logs, processes them, and returns a summary of the report"
+description = "A utility that ingests text-based logs and returns a visualization summaries of the logs"
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
@@ -19,5 +19,5 @@ package = true
 # where = ["src"]
 
 [project.scripts]
-events-timeline = "events_timeline.main:main"
+logviz = "logviz.main:main"
 
