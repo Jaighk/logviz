@@ -1,0 +1,4 @@
+SUPPORTED ={
+    "csv",
+    "json",
+}

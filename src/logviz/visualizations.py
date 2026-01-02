@@ -2,26 +2,28 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
-import pytz
+
+from termcolor import cprint
 
 
-def generate_bar_graph(df: pd.DataFrame) -> None:
+def generate_bar_graph(df: pd.DataFrame, filename: str) -> tuple[plt.Figure, plt.Axes]:
     """
-    Generates a basic bar graph based on values that meet the Condition
+    Returns a bar graph based on parameters passed at runtime
     """
-    pass
+    cprint(f"[-] Generating bar graph: {filename}")
 
 
 def generate_timeline(df: pd.DataFrame, timeline: dict[str, str], filename: str) -> tuple[plt.Figure, plt.Axes]:
     """
-    Generates a timeline based on parameters passed when running the program
+    Generates a timeline based on parameters passed at runtime
     timeline = {
         "time_column": str,
         "interval": int, # in minutes
         "data_column": str, # column of data to plot over time
     }
     """
-    print(f"Generating timeline: {filename}")
+
+    cprint(f"[-] Generating timeline: {filename}")
 
     # --- Format the dataframe ---
     df: pd.DataFrame = df.dropna(subset=[timeline["time_col"]])

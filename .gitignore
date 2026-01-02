@@ -1,5 +1,7 @@
 .git
-/example_reports/*
 __pycache__/
 .DStore
 *.egg-info/
+
+example_reports/
+tests/
