@@ -4,11 +4,10 @@ import os
 
 from termcolor import cprint
 
-def instantiate_data(file: str, time_col: str) -> pd.DataFrame:
+def instantiate_data(file: str, time_col=None) -> pd.DataFrame:
     """
-    Generates and returns the pd.DataFrame from the specified file
+    Generates and returns the pd.DataFrame from the specified file with a Time index
     """
-
     file_type: str = file.split(sep=".")[-1]
     df: pd.DataFrame = pd.DataFrame()
     match file_type:
@@ -19,6 +18,8 @@ def instantiate_data(file: str, time_col: str) -> pd.DataFrame:
                         file,
                         parse_dates=[time_col],
                     )
+                else:
+                    df: pd.DataFrame = pd.read_csv(file)
             except Exception as e:
                 cprint(f"{e}", color="red", attrs=["bold"])
         case _: pass
@@ -30,14 +31,14 @@ def save_plot(plot: tuple[plt.Figure, plt.Axes], output_destination: str, save_f
     """
     Saves generated plots to specified output_desitnation
     """
-
     try: 
         if not os.path.exists(output_destination):
             os.mkdir(output_destination)
-        destination_path: str = f"{output_destination}{save_file['name']}_{save_file['graph_type']}"
+        destination_path: str = f"{output_destination}/{save_file['graph_type']}_{save_file['name']}"
+        cprint(f"{destination_path}", color="cyan")
         plot[0].savefig(
             fname=destination_path,
-            dpi="figure",
+            dpi=300,
         )
         cprint(f"[\u2713] Plot saved: {destination_path}", color="green")
     except Exception as e:

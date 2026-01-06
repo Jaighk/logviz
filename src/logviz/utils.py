@@ -2,6 +2,11 @@ import argparse
 import os
 
 from typing import Any
+from termcolor import cprint
+
+from logviz.config import (
+    SUPPORTED
+)
 
 def parse_args(args: list[str]) -> dict[str, Any]:
     """
@@ -70,8 +75,8 @@ def get_context(args: argparse.Namespace):
 
     if args.bar:
         bar = {
-            "x", args.bar[0],
-            "y", args.bar[1]
+            "x": args.bar[0],
+            "y": args.bar[1]
         }
 
 
@@ -81,3 +86,13 @@ def get_context(args: argparse.Namespace):
         "bar": bar,
         "output_directory": args.output_directory
     }
+
+def check_validity(file: str) -> bool:
+    object_type: str = file.split(sep=".")[-1]
+    if os.path.isdir(file):
+        cprint(f"[!] Object is a directory. Skipping...", color="yellow")
+        return False
+    if  object_type not in SUPPORTED:
+        cprint(f"[!] Object type: {object_type} is not supported. Skipping...", color="yellow")
+        return False
+    return True
