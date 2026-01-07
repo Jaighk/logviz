@@ -10,11 +10,11 @@ def generate_bar_graph(df: pd.DataFrame, filename: str, x_col: str, y_col: str) 
     """
     Returns a bar graph based on parameters passed at runtime
     """
+
     cprint(f"[-] Generating bar graph: {filename}")
     # ----- #
     df[x_col] = df[x_col].astype(str).str.strip()
     df[y_col] = df[y_col].astype(str).str.strip()
-
     counts = (
         df.groupby([x_col, y_col])
         .size()
@@ -25,11 +25,9 @@ def generate_bar_graph(df: pd.DataFrame, filename: str, x_col: str, y_col: str) 
         columns=y_col,
         values='count'
     ).fillna(0)
-    # sort by descending total y_col values
-    pivot = pivot.loc[pivot.sum(axis=1).sort_values(ascending=False).index]
+    pivot = pivot.loc[pivot.sum(axis=1).sort_values(ascending=False).index] # sort by descending total y_col values
 
-    # plot
-    
+    # configure the plot
     width = max(12, 0.5 * len(pivot.index) + 6)
     fig, ax = plt.subplots(figsize=(width, 10), layout="constrained")
     pivot.plot(kind="bar", stacked=True, ax=ax)

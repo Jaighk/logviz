@@ -22,17 +22,15 @@ from logviz.visualizations import (
 
 def main() -> None:
     """
-    App entry point
+    logviz entry point
     """
+
     cprint("[-] Generating plots...")
     args = parse_args(args=sys.argv)
     save_file: dict[str, str] = {
         "name": "",
         "graph_type": "",
     }
-
-
-
     for file in args["files"]: 
         cprint(f"[-] Working: {file}")
         if not check_validity(file):
@@ -40,9 +38,9 @@ def main() -> None:
 
         if args["timeline"]:
             df: pd.DataFrame = instantiate_data(
-                            file=file, 
-                            time_col=args["timeline"]["time_col"]
-                        )
+                file=file, 
+                time_col=args["timeline"]["time_col"]
+            )
         else:
             df: pd.DataFrame = instantiate_data(file)
 
@@ -67,7 +65,7 @@ def main() -> None:
                     "name": os.path.basename(file).split(sep=".")[0],
                     "graph_type": 'bar'
                 }
-                new_histogram: plt.Axes = generate_bar_graph(
+                new_histogram: tuple[plt.Figure, plt.Axes] = generate_bar_graph(
                     df=df, 
                     filename=save_file["name"],
                     x_col=args["bar"]["x"],
@@ -81,7 +79,6 @@ def main() -> None:
         except Exception as e:
             cprint(f"[X] {e}", color="red", attrs=["bold"])
             continue
-
     cprint("[\u2713] Plot generation complete", color="green")
     cprint(f"[\u2713] Plots saved at: {os.path.abspath(args['output_directory'])}", color="green")
         

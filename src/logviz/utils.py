@@ -58,28 +58,23 @@ def get_context(args: argparse.Namespace):
     timeline= dict()
     files = list()
     bar = dict()
-
     for item in args.files:
         if os.path.isdir(item):
             for file in os.listdir(item):
                 files.append(f"{item}/{file}")
         else:
             files.append(item)
-
     if args.timeline:
         timeline: dict[str, str]= {
             "time_col": args.timeline[0],
             "interval": args.timeline[1],
             "data_col": args.timeline[2],
         }
-
     if args.bar:
         bar = {
             "x": args.bar[0],
             "y": args.bar[1]
         }
-
-
     return {
         "files": files,
         "timeline": timeline,
