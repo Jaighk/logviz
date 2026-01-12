@@ -41,6 +41,7 @@ def save_plot(plot: tuple[plt.Figure, plt.Axes], output_destination: str, save_f
             fname=destination_path,
             dpi=300,
         )
+        plt.close(plot[0])
         cprint(f"[\u2713] Plot saved: {destination_path}", color="green")
     except Exception as e:
         cprint(f"[X] {e}", color="red", attrs=["bold"])
